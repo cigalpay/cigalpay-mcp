@@ -66,6 +66,10 @@ export function createServer(env = process.env) {
                 return_url: z.string().url().optional().describe('Where the customer goes after paying'),
                 notify_url: z.string().url().optional().describe('Public HTTPS URL that receives signed payment notifications'),
                 lang: z.enum(['en', 'fr', 'es', 'de']).optional().describe('Checkout language (default en)'),
+                fee_paid_by: z
+                    .enum(['customer', 'merchant'])
+                    .optional()
+                    .describe("Who pays the processing fee: 'customer' adds it to the price the customer pays. Omit to use the dashboard setting"),
             },
             annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true },
         },
@@ -85,6 +89,7 @@ export function createServer(env = process.env) {
                     returnUrl: a.return_url || env.CIGALPAY_RETURN_URL || DEFAULT_RETURN_URL,
                     notifyUrl,
                     lang: a.lang,
+                    feePaidBy: a.fee_paid_by,
                 });
                 return { checkout_id: res.id, link: res.chargeLink, order_id: orderId, amount: a.amount, currency: a.currency };
             });

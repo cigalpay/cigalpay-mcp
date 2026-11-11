@@ -15,7 +15,7 @@ Solana, Litecoin and more), with the rate locked for 30 minutes.
 
 | Tool | What it does |
 |---|---|
-| `create_checkout` | Create a payment priced in USD or EUR and return the checkout link (up to 5,000 per payment) |
+| `create_checkout` | Create a payment priced in USD or EUR and return the checkout link (up to 5,000 per payment). `fee_paid_by: customer` adds the processing fee to the customer's price |
 | `get_payment` | Status, coin and amounts of a payment. Paid means `confirmed` or `finished` |
 | `get_payments_by_order` | Every payment created for one of your order references |
 | `list_active_payments` | Payments still waiting for the customer |

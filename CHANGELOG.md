@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- `create_checkout` takes `fee_paid_by` (`customer` or `merchant`): who pays the processing fee on that payment.
+  Left out, the dashboard setting applies. Needs cigalpay-js-sdk 2.3.0.
+
 ## 1.0.1
 
 - Published from GitHub Actions with npm provenance.

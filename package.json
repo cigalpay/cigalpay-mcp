@@ -1,6 +1,6 @@
 {
   "name": "cigalpay-mcp",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "mcpName": "io.github.cigalpay/cigalpay-mcp",
   "description": "MCP server for CigalPay: let Claude, Cursor and other AI assistants create crypto payment links, check payments and refunds.",
   "type": "module",

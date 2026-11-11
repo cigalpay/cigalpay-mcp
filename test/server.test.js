@@ -58,6 +58,16 @@ test('create_checkout sends the pre-invoice and returns the link', async () => {
     });
 });
 
+test('create_checkout passes fee_paid_by through', async () => {
+    reply = () => ({ status: 201, body: { id: 'chk_10', chargeLink: 'https://pay.cigalpay.com/charge/chk_10' } });
+    const client = await connect(ENV);
+    await client.callTool({ name: 'create_checkout', arguments: { amount: 100, currency: 'EUR', description: 'd', fee_paid_by: 'customer' } });
+    assert.equal(requests[0].body.feePaidBy, 'customer');
+    const bad = await client.callTool({ name: 'create_checkout', arguments: { amount: 100, currency: 'EUR', description: 'd', fee_paid_by: 'buyer' } });
+    assert.equal(bad.isError, true);
+    assert.equal(requests.length, 1);
+});
+
 test('create_checkout generates an order id and needs a notify URL', async () => {
     reply = () => ({ status: 201, body: { id: 'x', chargeLink: 'https://l' } });
     const data = JSON.parse(text(await (await connect(ENV)).callTool({ name: 'create_checkout', arguments: { amount: 5, currency: 'USD', description: 'd' } })));
