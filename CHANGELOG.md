@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1
+
+- Published from GitHub Actions with npm provenance.
+- The server reports the version from package.json.
+
 ## 1.0.0
 
 - First release: `create_checkout`, `get_payment`, `get_payments_by_order`, `list_active_payments`,

@@ -2,11 +2,12 @@
 // Credentials come from the environment and never appear in tool results.
 
 import { randomUUID } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { CigalPay } from 'cigalpay-js-sdk';
 
-export const VERSION = '1.0.0';
+export const VERSION = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')).version;
 const DEFAULT_RETURN_URL = 'https://cigalpay.com/';
 
 const ok = (data) => ({ content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] });
