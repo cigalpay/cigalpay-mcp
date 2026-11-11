@@ -1,0 +1,50 @@
+{
+  "name": "cigalpay-mcp",
+  "version": "1.0.0",
+  "mcpName": "io.github.cigalpay/cigalpay-mcp",
+  "description": "MCP server for CigalPay: let Claude, Cursor and other AI assistants create crypto payment links, check payments and refunds.",
+  "type": "module",
+  "bin": {
+    "cigalpay-mcp": "index.js"
+  },
+  "main": "server.js",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cigalpay/cigalpay-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "cigalpay",
+    "crypto",
+    "payments",
+    "bitcoin",
+    "usdt",
+    "ai-agents",
+    "claude"
+  ],
+  "author": "cigalpay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cigalpay/cigalpay-mcp/issues"
+  },
+  "homepage": "https://cigalpay.com/developers",
+  "files": [
+    "index.js",
+    "server.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "cigalpay-js-sdk": "^2.2.1",
+    "zod": "^3.25.76"
+  }
+}

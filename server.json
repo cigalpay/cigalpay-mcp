@@ -1,0 +1,52 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.cigalpay/cigalpay-mcp",
+  "title": "CigalPay",
+  "description": "Crypto payments: create Bitcoin, USDT and other crypto payment links, track payments and refunds.",
+  "websiteUrl": "https://cigalpay.com/developers",
+  "repository": {
+    "url": "https://github.com/cigalpay/cigalpay-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "cigalpay-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "CIGALPAY_ACCOUNT_ID",
+          "description": "Your Account ID (dashboard > Settings > API credentials)",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": false
+        },
+        {
+          "name": "CIGALPAY_API_KEY",
+          "description": "Your API key (dashboard > Settings > API credentials)",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true
+        },
+        {
+          "name": "CIGALPAY_NOTIFY_URL",
+          "description": "Default public HTTPS URL for signed payment notifications",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        },
+        {
+          "name": "CIGALPAY_ALLOW_REFUNDS",
+          "description": "Set to 1 to enable the create_refund tool",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

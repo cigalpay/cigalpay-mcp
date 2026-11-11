@@ -1,0 +1,47 @@
+# Pushing a tag vX.Y.Z tests the server, stages it on npm through Trusted
+# Publishing (no token; provenance added by npm) and creates the GitHub release.
+# The version goes live only once a maintainer approves it with 2FA on
+# npmjs.com -> Staged Packages. Then run the "MCP Registry" workflow.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      # Staged publishing needs npm 11.15+; Node 22 ships npm 10.
+      - run: npm install -g npm@11
+
+      - name: Check the tag matches package.json and server.json
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg=$(node -p "require('./package.json').version")
+          srv=$(node -p "require('./server.json').version")
+          srvpkg=$(node -p "require('./server.json').packages[0].version")
+          echo "tag=$tag package=$pkg server=$srv/$srvpkg"
+          [ "$tag" = "$pkg" ] && [ "$tag" = "$srv" ] && [ "$tag" = "$srvpkg" ] || { echo "::error::Versions don't match the tag"; exit 1; }
+
+      - run: npm ci
+      - run: npm test
+
+      - name: Stage on npm (approve on npmjs.com to publish)
+        run: npm stage publish --provenance --access public
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --title "${GITHUB_REF_NAME#v}" --generate-notes
