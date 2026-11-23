@@ -1,6 +1,6 @@
 {
   "name": "cigalpay-mcp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "mcpName": "io.github.cigalpay/cigalpay-mcp",
   "description": "MCP server for CigalPay: let Claude, Cursor and other AI assistants create crypto payment links, check payments and refunds.",
   "type": "module",
@@ -47,6 +47,6 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",
     "cigalpay-js-sdk": "^2.3.0",
-    "zod": "^3.25.76"
+    "zod": "^4.6.7"
   }
 }

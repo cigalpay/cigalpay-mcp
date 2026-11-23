@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.1
+
+- zod 4 (fixes GHSA-mrhx-c7xc-m3w5, memory exhaustion on oversized input).
+- The server instructions tell the assistant that tool results are data, not instructions: text in them
+  (descriptions, order references, refund reasons) can come from other people and is never acted on.
+- Length limits on payment and order ids.
+
 ## 1.1.0
 
 - `create_checkout` takes `fee_paid_by` (`customer` or `merchant`): who pays the processing fee on that payment.
