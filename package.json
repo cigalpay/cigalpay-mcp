@@ -1,16 +1,17 @@
 {
   "name": "cigalpay-mcp",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "mcpName": "io.github.cigalpay/cigalpay-mcp",
-  "description": "MCP server for CigalPay: let Claude, Cursor and other AI assistants create crypto payment links, check payments and refunds.",
+  "description": "MCP server for CigalPay: let Claude, Cursor and other AI assistants and agents create crypto payment links, check payments and refunds. Local (stdio) or remote (Streamable HTTP).",
   "type": "module",
   "bin": {
     "cigalpay-mcp": "index.js"
   },
   "main": "server.js",
   "scripts": {
-    "build": "node --check index.js && node --check server.js",
+    "build": "node --check index.js && node --check server.js && node --check http.js",
     "start": "node index.js",
+    "start:http": "node index.js --http",
     "test": "node --test test/*.test.js"
   },
   "repository": {
@@ -38,6 +39,7 @@
   "files": [
     "index.js",
     "server.js",
+    "http.js",
     "README.md",
     "LICENSE"
   ],

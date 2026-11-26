@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0
+
+- Remote mode: `cigalpay-mcp --http` serves the same tools over Streamable HTTP (`/mcp`), for agents on
+  platforms that only accept a remote MCP URL. Stateless: each request brings the merchant's credentials
+  (`Authorization: Bearer <accountId>:<apiKey>`), nothing is stored. Hosted at `https://mcp.cigalpay.com/mcp`.
+- Optional headers: `X-CigalPay-Notify-Url`, `X-CigalPay-Return-Url`, `X-CigalPay-Allow-Refunds: 1`.
+
 ## 1.1.1
 
 - zod 4 (fixes GHSA-mrhx-c7xc-m3w5, memory exhaustion on oversized input).

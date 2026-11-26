@@ -69,6 +69,40 @@ Add to the client's MCP configuration (`claude_desktop_config.json`, `.cursor/mc
 }
 ```
 
+### Remote server (agents hosted on a platform)
+
+If your agent runs on a service that only accepts a remote MCP server URL, use CigalPay's hosted server:
+
+```
+https://mcp.cigalpay.com/mcp
+```
+
+Transport: Streamable HTTP. It is stateless and stores nothing: send your credentials with every request.
+
+| Header | |
+|---|---|
+| `Authorization` | `Bearer <accountId>:<apiKey>` (required). Or `Bearer <apiKey>` plus `X-CigalPay-Account-Id: <accountId>` |
+| `X-CigalPay-Notify-Url` | Default notification URL for `create_checkout` |
+| `X-CigalPay-Return-Url` | Where customers go after paying |
+| `X-CigalPay-Allow-Refunds` | `1` to enable `create_refund` |
+
+Example (OpenAI Responses API, Claude API MCP connector and similar take a URL and a token or headers):
+
+```json
+{
+  "type": "mcp",
+  "server_label": "cigalpay",
+  "server_url": "https://mcp.cigalpay.com/mcp",
+  "headers": {
+    "Authorization": "Bearer your-account-id:your-api-key",
+    "X-CigalPay-Notify-Url": "https://your-site.com/cigalpay/notify"
+  }
+}
+```
+
+To run your own remote server instead: `npx -y cigalpay-mcp --http` (port `PORT`, default 8080), or
+`docker run -p 8080:8080 cigalpay-mcp --http`. Put it behind HTTPS.
+
 ## Payment notifications
 
 CigalPay sends a signed notification to your notify URL when a payment's status changes. Check the

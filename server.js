@@ -77,10 +77,10 @@ export function createServer(env = process.env) {
             annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true },
         },
         async (a) => {
-            if (!accountId) return fail('Set CIGALPAY_ACCOUNT_ID (dashboard > Settings > API credentials) to create payment links.');
+            if (!accountId) return fail('Set CIGALPAY_ACCOUNT_ID (remote server: send Authorization: Bearer <accountId>:<apiKey>). Both are in dashboard > Settings > API credentials.');
             const notifyUrl = a.notify_url || env.CIGALPAY_NOTIFY_URL;
             if (!notifyUrl) {
-                return fail('Pass notify_url, or set CIGALPAY_NOTIFY_URL: a public HTTPS URL that receives the signed payment notifications.');
+                return fail('Pass notify_url, or set CIGALPAY_NOTIFY_URL (remote server: the X-CigalPay-Notify-Url header): a public HTTPS URL that receives the signed payment notifications.');
             }
             const orderId = a.order_id || `mcp-${randomUUID().slice(0, 8)}`;
             return call(async () => {

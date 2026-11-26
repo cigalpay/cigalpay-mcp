@@ -8,12 +8,12 @@
     "url": "https://github.com/cigalpay/cigalpay-mcp",
     "source": "github"
   },
-  "version": "1.1.1",
+  "version": "1.2.0",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "cigalpay-mcp",
-      "version": "1.1.1",
+      "version": "1.2.0",
       "transport": {
         "type": "stdio"
       },
@@ -44,6 +44,32 @@
           "description": "Set to 1 to enable the create_refund tool",
           "isRequired": false,
           "format": "string",
+          "isSecret": false
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.cigalpay.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer <accountId>:<apiKey> (dashboard > Settings > API credentials)",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "X-CigalPay-Notify-Url",
+          "description": "Default public HTTPS URL for signed payment notifications",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "X-CigalPay-Allow-Refunds",
+          "description": "Set to 1 to enable the create_refund tool",
+          "isRequired": false,
           "isSecret": false
         }
       ]
